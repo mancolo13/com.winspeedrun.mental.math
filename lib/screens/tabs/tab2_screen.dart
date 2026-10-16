@@ -19,14 +19,17 @@ class _Tab2ScreenState extends State<Tab2Screen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _chip('Times Tables', 0),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            child: Row(
+              children: [
+                _chip('Times Tables', 0),
               _chip('Big Addition', 1),
               _chip('Square Roots', 2),
               _chip('Fast Percent', 3),
-            ],
+              ],
+            ),
           ),
           const SizedBox(height: 16),
           ...List.generate(5, (i) => Container(
@@ -47,7 +50,7 @@ class _Tab2ScreenState extends State<Tab2Screen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(const ['Lightning Multiplication 64x9', 'Rapid Square 32^2', 'Sub-Second Div 744/8', 'Compound Interest 12%', 'High-Speed Fraction Sum'][i % 5], style: const TextStyle(fontWeight: FontWeight.bold)),
+                      Text(const ['Lightning Multiplication 64x9', 'Rapid Square 32^2', 'Sub-Second Div 744/8', 'Compound Interest 12%', 'High-Speed Fraction Sum'][i % 5], style: const TextStyle(fontWeight: FontWeight.bold), maxLines: 1, overflow: TextOverflow.ellipsis),
                       Text('Stage ${i + 1} • Verified status', style: const TextStyle(fontSize: 12, color: Colors.white60)),
                     ],
                   ),
@@ -70,6 +73,7 @@ class _Tab2ScreenState extends State<Tab2Screen> {
     return GestureDetector(
       onTap: () => setState(() => _idx = i),
       child: Container(
+        margin: const EdgeInsets.only(right: 8),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
           color: a ? AppTheme.primaryColor : Colors.white10,
